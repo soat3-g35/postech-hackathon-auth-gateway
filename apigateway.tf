@@ -122,7 +122,6 @@ resource "aws_api_gateway_integration_response" "options_integration_response" {
 
 resource "aws_api_gateway_deployment" "deployment" {
   depends_on = [
-    aws_api_gateway_integration.lambda_integration,
     aws_api_gateway_integration.options_integration, # Add this line
   ]
 
