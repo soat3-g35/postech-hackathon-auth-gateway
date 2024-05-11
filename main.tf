@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_lambda_function" "html_lambda" {
   filename         = "index.zip"
-  function_name    = "myLambdaFunction"
+  function_name    = "g35_microservices_lf_successfull"
   role             = aws_iam_role.lambda_role.arn
   handler          = "index.handler"
   runtime          = "nodejs18.x"
@@ -39,7 +39,7 @@ resource "aws_lambda_permission" "apigw_lambda" {
   function_name = aws_lambda_function.html_lambda.function_name
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_rest_api.my_api.execution_arn}/*/*/*"
+  source_arn = "${aws_api_gateway_rest_api.g35_microservices.execution_arn}/*/*/*"
 }
 
 data "archive_file" "lambda_package" {
