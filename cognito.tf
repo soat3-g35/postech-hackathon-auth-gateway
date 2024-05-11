@@ -1,5 +1,5 @@
-resource "aws_cognito_user_pool" "pool" {
-  name = "mypool"
+resource "aws_cognito_user_pool" "g35_microservices_pool" {
+  name = "g35_microservices_pool"
 }
 
 resource "aws_cognito_user_pool_client" "client" {
@@ -12,13 +12,13 @@ resource "aws_cognito_user_pool_client" "client" {
   supported_identity_providers         = ["COGNITO"]
 
 
-  user_pool_id  = aws_cognito_user_pool.pool.id
+  user_pool_id  = aws_cognito_user_pool.g35_microservices_pool.id
   callback_urls = ["https://example.com"]
-  logout_urls   = ["https://sumeet.life"]
+  logout_urls   = ["https://example.com"]
 }
 
 resource "aws_cognito_user" "example" {
-  user_pool_id = aws_cognito_user_pool.pool.id
-  username     = "sumeet.n"
+  user_pool_id = aws_cognito_user_pool.g35_microservices_pool.id
+  username     = "new_test"
   password     = "Test@123"
 }
