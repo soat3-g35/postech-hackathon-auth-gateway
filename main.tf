@@ -11,8 +11,8 @@ resource "aws_lambda_function" "html_lambda" {
   source_code_hash = data.archive_file.lambda_package.output_base64sha256
 }
 
-resource "aws_iam_role" "lambda_role" {
-  name = "lambda-role"
+resource "aws_iam_role" "g35_microservices_lambda_role" {
+  name = "g35_microservices_lambda-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
