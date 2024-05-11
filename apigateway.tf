@@ -15,6 +15,15 @@ resource "aws_api_gateway_authorizer" "g35_microservices" {
   provider_arns = [aws_cognito_user_pool.g35_microservices_pool.arn]
 }
 
+resource "aws_api_gateway_integration" "lambda_integration" {
+  rest_api_id             = aws_api_gateway_rest_api.g35_microservices.id
+  resource_id             = aws_api_gateway_resource.root.id
+  http_method             = aws_api_gateway_method.proxy.http_method
+  integration_http_method = "POST"
+  type                    = "AWS"
+  uri                     = aws_lambda_function.html_lambda.invoke_arn
+}
+
 resource "aws_api_gateway_resource" "root" {
   rest_api_id = aws_api_gateway_rest_api.g35_microservices.id
   parent_id   = aws_api_gateway_rest_api.g35_microservices.root_resource_id
@@ -61,7 +70,8 @@ resource "aws_api_gateway_integration_response" "proxy" {
   }
 
   depends_on = [
-    aws_api_gateway_method.proxy
+    aws_api_gateway_method.proxy,
+    aws_api_gateway_integration.lambda_integration
   ]
 }
 
@@ -122,6 +132,7 @@ resource "aws_api_gateway_integration_response" "options_integration_response" {
 
 resource "aws_api_gateway_deployment" "deployment" {
   depends_on = [
+    aws_api_gateway_integration.lambda_integration,
     aws_api_gateway_integration.options_integration, # Add this line
   ]
 
