@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_lambda_function" "html_lambda" {
   filename         = "index.zip"
   function_name    = "g35_microservices_lf_successfull"
-  role             = aws_iam_role.lambda_role.arn
+  role             = aws_iam_role.g35_microservices_lambda_role.arn
   handler          = "index.handler"
   runtime          = "nodejs18.x"
   source_code_hash = data.archive_file.lambda_package.output_base64sha256
@@ -30,7 +30,7 @@ resource "aws_iam_role" "g35_microservices_lambda_role" {
 
 resource "aws_iam_role_policy_attachment" "lambda_basic" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-  role       = aws_iam_role.lambda_role.name
+  role       = aws_iam_role.g35_microservices_lambda_role.name
 }
 
 resource "aws_lambda_permission" "apigw_lambda" {
