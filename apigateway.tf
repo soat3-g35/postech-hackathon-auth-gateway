@@ -12,7 +12,7 @@ resource "aws_api_gateway_authorizer" "g35_microservices" {
   name          = "g35_microservicesg_authorizer2"
   rest_api_id   = aws_api_gateway_rest_api.g35_microservices.id
   type          = "COGNITO_USER_POOLS"
-  provider_arns = [aws_cognito_user_pool.pool.arn]
+  provider_arns = [aws_cognito_user_pool.g35_microservices_pool.arn]
 }
 
 resource "aws_api_gateway_resource" "root" {
