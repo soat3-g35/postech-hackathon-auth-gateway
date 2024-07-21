@@ -6,7 +6,7 @@ terraform {
   cloud {
     organization = "DevopsFiapSoat3-G35"
     workspaces {
-      name = "postech-fase-4-auth-gateway"
+      name = "postech-hackathon-auth-gateway"
     }
   }
 
